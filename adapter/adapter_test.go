@@ -14,3 +14,14 @@ func TestAdapterByEmbedded(t *testing.T) {
 	}
 
 }
+
+func TestAdapterByDelegate(t *testing.T) {
+	var decorator Decorator
+
+	decorator = NewDelegateDecorateBanner("A")
+
+	if str := decorator.decorate(); str != "*A*" {
+		t.Errorf("Expect decorated str to %s, but %s", "*A*", str)
+	}
+
+}
