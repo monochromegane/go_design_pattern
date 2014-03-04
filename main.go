@@ -1,9 +1,9 @@
 package main
 
 import (
-        "fmt"
+	"fmt"
 )
 
-func main(){
-        fmt.Printf("It works\n")
+func main() {
+	fmt.Printf("It works\n")
 }
