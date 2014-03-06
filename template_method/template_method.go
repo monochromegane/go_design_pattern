@@ -6,18 +6,6 @@ type printer interface {
 	close() string
 }
 
-// 本来のテンプレートメソッドパターンは各メソッドを束ねるテンプレートメソッドと
-// 各メソッドを同一クラスに持つ構成になるが、以下の理由からテンプレートメソッド
-// と各メソッドを分けた。
-// - Go言語の構造体埋込と継承は別物である
-// - 子構造体を親構造体型の変数に格納することはできない（そもそも親子関係ではなく構造体を内包しているだけ）
-// - 親構造体のメソッド内で子の実装を呼び出すことはなく、あくまで親構造体の中で実行する
-//  type Abstract struct { some_interface }
-//  func (self *Abstract) templateMethod() {
-//      self.method() // panic: runtime error: invalid memory address or nil pointer dereference
-//  }
-//
-
 type AbstractDisplay struct {
 }
 
