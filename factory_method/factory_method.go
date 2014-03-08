@@ -15,6 +15,14 @@ type Factory struct {
 // インスタンス生成部分にはTemplateMethodパターンを使う。
 // Goではclient-specified self patternにより親構造体のメソッド内で子構造体の
 // 実装を呼ぶことができる
+//
+// 処理の流れが簡易でテンプレートを使わないでよければ、ファクトリとなる関数を
+// 直接引数に渡してもよい
+// この場合、個別のファクトリークラスを定義しなくてもよくなる。
+// func (self *Factory) create(factoryMethod func() user) {
+//   self.product = factoryMethod()
+//   return self.product
+// }
 func (self *Factory) create(factory creater, owner string) user {
 	user := factory.createProduct(owner)
 	factory.registerProduct(user)
