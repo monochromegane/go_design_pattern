@@ -46,6 +46,9 @@ func (self *hand) fight(h *hand) int {
 	}
 }
 
+// Goでは関数がファーストクラスであるため、戦略がひとつのメソッドのみで
+// 完結する場合は、関数を渡すことでStrategyパターンとすることもできる。
+// type strategy func() *hand
 type strategy interface {
 	nextHand() *hand
 	study(win bool)
