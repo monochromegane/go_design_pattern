@@ -11,7 +11,7 @@ var instance *singleton
 // 一意であることを保証する
 func GetInstance() *singleton {
 	if instance == nil {
-		return &singleton{}
+		instance = &singleton{}
 	}
 	return instance
 }

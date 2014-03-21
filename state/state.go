@@ -16,7 +16,7 @@ type dayState struct {
 
 func GetDayInstance() *dayState {
 	if dayInstance == nil {
-		return &dayState{}
+		dayInstance = &dayState{}
 	}
 	return dayInstance
 }
@@ -38,7 +38,7 @@ type nightState struct {
 
 func GetNightInstance() *nightState {
 	if nightInstance == nil {
-		return &nightState{}
+		nightInstance = &nightState{}
 	}
 	return nightInstance
 }
@@ -61,7 +61,7 @@ type context interface {
 
 type safeFrame struct {
 	state state
-	logs []string
+	logs  []string
 }
 
 func (self *safeFrame) setClock(hour int) {
