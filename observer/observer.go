@@ -24,6 +24,10 @@ type randomNumberGenerator struct {
 	*numberGenerator
 }
 
+type number interface {
+	getNumber() int
+}
+
 func (self *randomNumberGenerator) getNumber() int {
 	return rand.Intn(50)
 }
@@ -37,7 +41,7 @@ type observer interface {
 }
 
 type digitObserver struct {
-	generator *randomNumberGenerator
+	generator number
 }
 
 func (self *digitObserver) update() int {
