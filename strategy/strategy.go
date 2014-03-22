@@ -28,11 +28,11 @@ func getHand(handValue int) *hand {
 	return hands[handValue]
 }
 
-func (self *hand) isStrongerThan(h *hand) bool {
+func (self *hand) IsStrongerThan(h *hand) bool {
 	return self.fight(h) == 1
 }
 
-func (self *hand) isWeakerThan(h *hand) bool {
+func (self *hand) IsWeakerThan(h *hand) bool {
 	return self.fight(h) == -1
 }
 
@@ -50,7 +50,7 @@ func (self *hand) fight(h *hand) int {
 // 完結する場合は、関数を渡すことでStrategyパターンとすることもできる。
 // type strategy func() *hand
 type strategy interface {
-	nextHand() *hand
+	NextHand() *hand
 	study(win bool)
 }
 
@@ -60,7 +60,7 @@ type winningStrategy struct {
 	prevHand *hand
 }
 
-func (self *winningStrategy) nextHand() *hand {
+func (self *winningStrategy) NextHand() *hand {
 	if !self.won {
 		// rand.Seed(self.seed)
 		self.prevHand = getHand(rand.Intn(3))
@@ -72,26 +72,26 @@ func (self *winningStrategy) study(win bool) {
 	self.won = win
 }
 
-type player struct {
-	name                           string
-	strategy                       strategy
+type Player struct {
+	Name                           string
+	Strategy                       strategy
 	wincount, losecount, gamecount int
 }
 
-func (self *player) nextHand() *hand {
-	return self.strategy.nextHand()
+func (self *Player) NextHand() *hand {
+	return self.Strategy.NextHand()
 }
 
-func (self *player) win() {
+func (self *Player) Win() {
 	self.wincount++
 	self.gamecount++
 }
 
-func (self *player) lose() {
+func (self *Player) Lose() {
 	self.losecount++
 	self.gamecount++
 }
 
-func (self *player) even() {
+func (self *Player) Even() {
 	self.gamecount++
 }

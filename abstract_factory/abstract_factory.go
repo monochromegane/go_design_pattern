@@ -15,34 +15,34 @@ type link interface {
 // ことで実現する
 type tray interface {
 	item
-	addToTray(item item)
+	AddToTray(item item)
 }
 
 type baseTray struct {
 	tray []item
 }
 
-func (self *baseTray) addToTray(item item) {
+func (self *baseTray) AddToTray(item item) {
 	self.tray = append(self.tray, item)
 }
 
 type page interface {
-	addToContent(item item)
-	output() string
+	AddToContent(item item)
+	Output() string
 }
 
 type basePage struct {
 	content []item
 }
 
-func (self *basePage) addToContent(item item) {
+func (self *basePage) AddToContent(item item) {
 	self.content = append(self.content, item)
 }
 
 type factory interface {
-	createLink(caption, url string) link
-	createTray(caption string) tray
-	createPage(title, author string) page
+	CreateLink(caption, url string) link
+	CreateTray(caption string) tray
+	CreatePage(title, author string) page
 }
 
 type mdLink struct {
@@ -73,7 +73,7 @@ type mdPage struct {
 	title, author string
 }
 
-func (self *mdPage) output() string {
+func (self *mdPage) Output() string {
 	content := "title: " + self.title + "\n"
 	content += "author: " + self.author + "\n"
 	for _, item := range self.content {
@@ -82,15 +82,15 @@ func (self *mdPage) output() string {
 	return content
 }
 
-type mdFactory struct {
+type MdFactory struct {
 }
 
-func (self *mdFactory) createLink(caption, url string) link {
+func (self *MdFactory) CreateLink(caption, url string) link {
 	return &mdLink{caption, url}
 }
-func (self *mdFactory) createTray(caption string) tray {
+func (self *MdFactory) CreateTray(caption string) tray {
 	return &mdTray{caption: caption}
 }
-func (self *mdFactory) createPage(title, author string) page {
+func (self *MdFactory) CreatePage(title, author string) page {
 	return &mdPage{title: title, author: author}
 }

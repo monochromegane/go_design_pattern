@@ -7,11 +7,11 @@ type builder interface {
 	close() string
 }
 
-type director struct {
+type Director struct {
 	builder builder
 }
 
-func (self *director) construct() string {
+func (self *Director) Construct() string {
 	result := self.builder.makeTitle("Title")
 	result += self.builder.makeString("String")
 	result += self.builder.makeItems([]string{
@@ -22,18 +22,18 @@ func (self *director) construct() string {
 	return result
 }
 
-type textBuilder struct {
+type TextBuilder struct {
 }
 
-func (self *textBuilder) makeTitle(title string) string {
+func (self *TextBuilder) makeTitle(title string) string {
 	return "# " + title + "\n"
 }
 
-func (self *textBuilder) makeString(str string) string {
+func (self *TextBuilder) makeString(str string) string {
 	return "## " + str + "\n"
 }
 
-func (self *textBuilder) makeItems(items []string) string {
+func (self *TextBuilder) makeItems(items []string) string {
 	var result string
 	for _, item := range items {
 		result += "- " + item + "\n"
@@ -41,6 +41,6 @@ func (self *textBuilder) makeItems(items []string) string {
 	return result
 }
 
-func (self *textBuilder) close() string {
+func (self *TextBuilder) close() string {
 	return "\n"
 }

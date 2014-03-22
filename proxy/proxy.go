@@ -1,50 +1,50 @@
 package proxy
 
 type printable interface {
-	setPrinterName(name string)
-	getPrinterName() string
-	print(str string) string
+	SetPrinterName(name string)
+	GetPrinterName() string
+	Print(str string) string
 }
 
 type printer struct {
 	name string
 }
 
-func (self *printer) setPrinterName(name string) {
+func (self *printer) SetPrinterName(name string) {
 	self.name = name
 }
 
-func (self *printer) getPrinterName() string {
+func (self *printer) GetPrinterName() string {
 	return self.name
 }
 
-func (self *printer) print(str string) string {
+func (self *printer) Print(str string) string {
 	return self.name + ":" + str
 }
 
-type printerProxy struct {
-	name string
+type PrinterProxy struct {
+	Name string
 	real *printer
 }
 
-func (self *printerProxy) setPrinterName(name string) {
+func (self *PrinterProxy) SetPrinterName(name string) {
 	if self.real != nil {
-		self.real.setPrinterName(name)
+		self.real.SetPrinterName(name)
 	}
-	self.name = name
+	self.Name = name
 }
 
-func (self *printerProxy) getPrinterName() string {
-	return self.name
+func (self *PrinterProxy) GetPrinterName() string {
+	return self.Name
 }
 
-func (self *printerProxy) print(str string) string {
+func (self *PrinterProxy) Print(str string) string {
 	self.realize()
-	return self.real.print(str)
+	return self.real.Print(str)
 }
 
-func (self *printerProxy) realize() {
+func (self *PrinterProxy) realize() {
 	if self.real == nil {
-		self.real = &printer{self.name}
+		self.real = &printer{self.Name}
 	}
 }

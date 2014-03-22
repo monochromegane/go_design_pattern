@@ -5,20 +5,20 @@ import (
 )
 
 func TestStrategy(t *testing.T) {
-	player1 := player{name: "A", strategy: &winningStrategy{seed: 10}}
-	player2 := player{name: "B", strategy: &winningStrategy{seed: 20}}
+	player1 := Player{Name: "A", Strategy: &winningStrategy{seed: 10}}
+	player2 := Player{Name: "B", Strategy: &winningStrategy{seed: 20}}
 
-	hand1 := player1.nextHand()
-	hand2 := player2.nextHand()
+	hand1 := player1.NextHand()
+	hand2 := player2.NextHand()
 
-	if hand1.isStrongerThan(hand2) {
-		player1.win()
-		player2.lose()
-	} else if hand1.isWeakerThan(hand2) {
-		player1.lose()
-		player2.win()
+	if hand1.IsStrongerThan(hand2) {
+		player1.Win()
+		player2.Lose()
+	} else if hand1.IsWeakerThan(hand2) {
+		player1.Lose()
+		player2.Win()
 	} else {
-		player1.even()
-		player2.even()
+		player1.Even()
+		player2.Even()
 	}
 }

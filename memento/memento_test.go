@@ -6,15 +6,15 @@ import (
 
 func TestMemento(t *testing.T) {
 
-	game := &game{100}
-	memento := game.createMemento()
+	game := &Game{100}
+	memento := game.CreateMemento()
 
-	game.money = 0
+	game.Money = 0
 
-	game.restoreMemento(memento)
+	game.RestoreMemento(memento)
 
-	if game.money != 100 {
-		t.Errorf("Expect money to equal %s, but %s\n", 100, game.money)
+	if game.Money != 100 {
+		t.Errorf("Expect money to equal %s, but %s\n", 100, game.Money)
 	}
 
 }

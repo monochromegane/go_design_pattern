@@ -5,8 +5,8 @@ import (
 )
 
 func TestFacade(t *testing.T) {
-	maker := pageMaker{}
-	result := maker.makeWelcomePage("a@a.com")
+	maker := PageMaker{}
+	result := maker.MakeWelcomePage("a@a.com")
 	expect := "# Welcome to a's page!"
 
 	if result != expect {

@@ -11,7 +11,7 @@ type colleague interface {
 }
 
 type button struct {
-	enabled  bool
+	Enabled  bool
 	mediator mediator
 }
 
@@ -20,7 +20,7 @@ func (self *button) setMediator(mediator mediator) {
 }
 
 func (self *button) setColleagueEnabled(enabled bool) {
-	self.enabled = enabled
+	self.Enabled = enabled
 }
 
 type radioButton struct {
@@ -37,33 +37,33 @@ func (self *radioButton) setColleagueEnabled(enabled bool) {
 	self.enabled = enabled
 }
 
-func (self *radioButton) check(checked bool) {
+func (self *radioButton) Check(checked bool) {
 	self.checked = checked
 	self.mediator.colleagueChanged()
 }
 
 type loginForm struct {
-	radioButton radioButton
-	button      button
+	RadioButton radioButton
+	Button      button
 }
 
-func newLoginForm() *loginForm {
+func NewLoginForm() *loginForm {
 	loginForm := &loginForm{}
 	loginForm.createColleagues()
 	return loginForm
 }
 
 func (self *loginForm) createColleagues() {
-	self.radioButton = radioButton{}
-	self.button = button{}
-	self.radioButton.setMediator(self)
-	self.button.setMediator(self)
+	self.RadioButton = radioButton{}
+	self.Button = button{}
+	self.RadioButton.setMediator(self)
+	self.Button.setMediator(self)
 }
 
 func (self *loginForm) colleagueChanged() {
-	if !self.radioButton.checked {
-		self.button.setColleagueEnabled(false)
+	if !self.RadioButton.checked {
+		self.Button.setColleagueEnabled(false)
 	} else {
-		self.button.setColleagueEnabled(true)
+		self.Button.setColleagueEnabled(true)
 	}
 }

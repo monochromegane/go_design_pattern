@@ -24,7 +24,7 @@ type AbstractDisplay struct {
 // 構造体をレシーバとするメソッドの引数に同じ構造体を渡すパターン（client-specified self pattern）を使う
 // これにより親構造体のメソッド内で子構造体の実装を呼ぶことができる
 
-func (self *AbstractDisplay) display(printer printer) string {
+func (self *AbstractDisplay) Display(printer printer) string {
 	result := printer.open()
 	for i := 0; i < 5; i++ {
 		result += printer.print()
@@ -35,14 +35,14 @@ func (self *AbstractDisplay) display(printer printer) string {
 
 type CharDisplay struct {
 	*AbstractDisplay
-	char rune
+	Char rune
 }
 
 func (self *CharDisplay) open() string {
 	return "<<"
 }
 func (self *CharDisplay) print() string {
-	return string(self.char)
+	return string(self.Char)
 }
 func (self *CharDisplay) close() string {
 	return ">>"
@@ -50,14 +50,14 @@ func (self *CharDisplay) close() string {
 
 type StringDisplay struct {
 	*AbstractDisplay
-	str string
+	Str string
 }
 
 func (self *StringDisplay) open() string {
 	return self.printLine()
 }
 func (self *StringDisplay) print() string {
-	return "| " + self.str + " |\n"
+	return "| " + self.Str + " |\n"
 }
 func (self *StringDisplay) close() string {
 	return self.printLine()
@@ -65,7 +65,7 @@ func (self *StringDisplay) close() string {
 
 func (self *StringDisplay) printLine() string {
 	line := "+-"
-	for _, _ = range self.str {
+	for _, _ = range self.Str {
 		line += "-"
 	}
 	line += "-+\n"
@@ -84,7 +84,7 @@ func (self *StringDisplay) printLine() string {
 //         printer printer
 // }
 //
-// func (self *Display) display() string {
+// func (self *Display) Display() string {
 // 	result := self.printer.open()
 // 	for i := 0; i < 5; i++ {
 // 		result += self.printer.print()

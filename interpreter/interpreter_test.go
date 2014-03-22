@@ -8,13 +8,13 @@ func TestInterpreter(t *testing.T) {
 
 	program := "program go right end"
 
-	node := programNode{}
+	node := ProgramNode{}
 	context := NewContext(program)
-	node.parse(context)
+	node.Parse(context)
 
 	expect := "program: go right "
-	if node.toString() != expect {
-		t.Errorf("Expect result to equal %s, but %s.\n", expect, node.toString())
+	if node.ToString() != expect {
+		t.Errorf("Expect result to equal %s, but %s.\n", expect, node.ToString())
 	}
 
 }

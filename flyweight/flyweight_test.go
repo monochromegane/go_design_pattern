@@ -6,7 +6,7 @@ import (
 
 func TestFlyWeight(t *testing.T) {
 	bigStr := NewBigString("121")
-	result := bigStr.print()
+	result := bigStr.Print()
 
 	expect := "-\n--\n-\n"
 	if result != expect {

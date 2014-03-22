@@ -6,15 +6,15 @@ import (
 
 func TestObserver(t *testing.T) {
 
-	random := &randomNumberGenerator{&numberGenerator{}}
+	random := NewRandomNumberGenerator()
 
-	o1 := &digitObserver{random}
-	o2 := &digitObserver{random}
+	o1 := &DigitObserver{random}
+	o2 := &DigitObserver{random}
 
-	random.addObserver(o1)
-	random.addObserver(o2)
+	random.AddObserver(o1)
+	random.AddObserver(o2)
 
-	result := random.execute()
+	result := random.Execute()
 
 	for _, r := range result {
 		if len(result) != 2 && r >= 50 {

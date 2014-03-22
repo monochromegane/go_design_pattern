@@ -19,10 +19,10 @@ func (self *mdWriter) title(title string) string {
 	return "# Welcome to " + title + "'s page!"
 }
 
-type pageMaker struct {
+type PageMaker struct {
 }
 
-func (self *pageMaker) makeWelcomePage(mail string) string {
+func (self *PageMaker) MakeWelcomePage(mail string) string {
 	database := database{}
 	writer := mdWriter{}
 

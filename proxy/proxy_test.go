@@ -5,20 +5,20 @@ import (
 )
 
 func TestProxy(t *testing.T) {
-	proxy := printerProxy{name: "A"}
-	name := proxy.getPrinterName()
+	proxy := PrinterProxy{Name: "A"}
+	name := proxy.GetPrinterName()
 
 	if name != "A" {
 		t.Errorf("Expect name to equal %s, but %s.\n", "A", name)
 	}
 
-	proxy.setPrinterName("B")
-	name = proxy.getPrinterName()
+	proxy.SetPrinterName("B")
+	name = proxy.GetPrinterName()
 	if name != "B" {
 		t.Errorf("Expect name to equal %s, but %s.\n", "B", name)
 	}
 
-	result := proxy.print("C")
+	result := proxy.Print("C")
 	if result != "B:C" {
 		t.Errorf("Expect result to equal %s, but %s.\n", "B:C", result)
 	}

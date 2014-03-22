@@ -8,16 +8,16 @@ func (self *memento) getMoney() int {
 	return self.money
 }
 
-type game struct {
-	money int
+type Game struct {
+	Money int
 }
 
-func (self *game) createMemento() *memento {
+func (self *Game) CreateMemento() *memento {
 	return &memento{
-		self.money,
+		self.Money,
 	}
 }
 
-func (self *game) restoreMemento(memento *memento) {
-	self.money = memento.getMoney()
+func (self *Game) RestoreMemento(memento *memento) {
+	self.Money = memento.getMoney()
 }

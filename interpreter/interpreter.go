@@ -5,44 +5,44 @@ import (
 )
 
 type node interface {
-	parse(context *context)
-	toString() string
+	Parse(context *context)
+	ToString() string
 }
 
-type programNode struct {
+type ProgramNode struct {
 	commandListNode node
 }
 
-func (self *programNode) parse(context *context) {
+func (self *ProgramNode) Parse(context *context) {
 	context.skipToken("program")
 	self.commandListNode = &commandListNode{}
-	self.commandListNode.parse(context)
+	self.commandListNode.Parse(context)
 }
 
-func (self *programNode) toString() string {
-	return "program: " + self.commandListNode.toString()
+func (self *ProgramNode) ToString() string {
+	return "program: " + self.commandListNode.ToString()
 }
 
 type commandListNode struct {
 	list []node
 }
 
-func (self *commandListNode) parse(context *context) {
+func (self *commandListNode) Parse(context *context) {
 	for {
 		if context.currentToken == "end" {
 			break
 		} else {
 			commandNode := &commandNode{}
-			commandNode.parse(context)
+			commandNode.Parse(context)
 			self.list = append(self.list, commandNode)
 		}
 	}
 }
 
-func (self *commandListNode) toString() string {
+func (self *commandListNode) ToString() string {
 	var str string
 	for _, l := range self.list {
-		str += l.toString()
+		str += l.ToString()
 	}
 	return str
 }
@@ -51,25 +51,25 @@ type commandNode struct {
 	node node
 }
 
-func (self *commandNode) parse(context *context) {
+func (self *commandNode) Parse(context *context) {
 	self.node = &primitiveCommandNode{}
-	self.node.parse(context)
+	self.node.Parse(context)
 }
 
-func (self *commandNode) toString() string {
-	return self.node.toString()
+func (self *commandNode) ToString() string {
+	return self.node.ToString()
 }
 
 type primitiveCommandNode struct {
 	name string
 }
 
-func (self *primitiveCommandNode) parse(context *context) {
+func (self *primitiveCommandNode) Parse(context *context) {
 	self.name = context.currentToken
 	context.skipToken(self.name)
 }
 
-func (self *primitiveCommandNode) toString() string {
+func (self *primitiveCommandNode) ToString() string {
 	return self.name + " "
 }
 

@@ -2,37 +2,37 @@ package prototype
 
 type producter interface {
 	clone() producter
-	getName() string
+	GetName() string
 }
 
-type manager struct {
+type Manager struct {
 	product producter
 }
 
-func (self *manager) register(producter producter) {
+func (self *Manager) Register(producter producter) {
 	self.product = producter
 }
 
-func (self *manager) create(name string) producter {
+func (self *Manager) Create(name string) producter {
 	producter := self.product
 	return producter.clone()
 }
 
-type product struct {
+type Product struct {
 	name string
 }
 
-func (self *product) setUp() {
+func (self *Product) SetUp() {
 	// something takes time...
 }
 
-func (self *product) getName() string {
+func (self *Product) GetName() string {
 	return self.name
 }
 
 // 新しい構造体に自身の値をセットして返すことで擬似的にcloneとした。
 // ポインタ参照まで考慮したdeepcopyに関しては実装もしくは機能を提供する
 // パッケージが必要になる
-func (self *product) clone() producter {
-	return &product{self.name}
+func (self *Product) clone() producter {
+	return &Product{self.name}
 }

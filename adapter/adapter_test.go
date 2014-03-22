@@ -9,7 +9,7 @@ func TestAdapterByEmbedded(t *testing.T) {
 
 	decorator = NewEmbeddedDecorateBanner("A")
 
-	if str := decorator.decorate(); str != "*A*" {
+	if str := decorator.Decorate(); str != "*A*" {
 		t.Errorf("Expect decorated str to %s, but %s", "*A*", str)
 	}
 
@@ -20,7 +20,7 @@ func TestAdapterByDelegate(t *testing.T) {
 
 	decorator = NewCompositionDecorateBanner("A")
 
-	if str := decorator.decorate(); str != "*A*" {
+	if str := decorator.Decorate(); str != "*A*" {
 		t.Errorf("Expect decorated str to %s, but %s", "*A*", str)
 	}
 

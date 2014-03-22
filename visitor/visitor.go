@@ -10,31 +10,31 @@ type visitor interface {
 }
 
 type element interface {
-	accept(visitor visitor) string
+	Accept(visitor visitor) string
 }
 
 type entry interface {
 	element
 	getName() string
 	getSize() int
-	add(entry entry)
+	Add(entry entry)
 }
 
-type baseEntry struct {
+type defaultEntry struct {
 	entry
 	name string
 }
 
-func (self *baseEntry) getName() string {
+func (self *defaultEntry) getName() string {
 	return self.name
 }
 
-func (self *baseEntry) print(entry entry) string {
+func (self *defaultEntry) print(entry entry) string {
 	return entry.getName() + " (" + strconv.Itoa(entry.getSize()) + ")\n"
 }
 
 type file struct {
-	*baseEntry
+	*defaultEntry
 	size int
 }
 
@@ -42,14 +42,14 @@ func (self *file) getSize() int {
 	return self.size
 }
 
-func (self *file) add(entry entry) {}
+func (self *file) Add(entry entry) {}
 
-func (self *file) accept(visitor visitor) string {
+func (self *file) Accept(visitor visitor) string {
 	return visitor.visitFile(self)
 }
 
 type directory struct {
-	*baseEntry
+	*defaultEntry
 	dir []entry
 }
 
@@ -61,11 +61,11 @@ func (self *directory) getSize() int {
 	return size
 }
 
-func (self *directory) add(entry entry) {
+func (self *directory) Add(entry entry) {
 	self.dir = append(self.dir, entry)
 }
 
-func (self *directory) accept(visitor visitor) string {
+func (self *directory) Accept(visitor visitor) string {
 	return visitor.visitDir(self)
 }
 
@@ -82,7 +82,7 @@ func (self *listVisitor) visitDir(directory *directory) string {
 	list := self.currentDir + "/" + directory.print(directory)
 	self.currentDir += "/" + directory.getName()
 	for _, dir := range directory.dir {
-		list += dir.accept(self)
+		list += dir.Accept(self)
 	}
 	self.currentDir = saveDir
 	return list
@@ -91,10 +91,10 @@ func (self *listVisitor) visitDir(directory *directory) string {
 // 利用側に埋込構造体を意識させないためのインスタンス生成関数。
 func NewFile(name string, size int) *file {
 	return &file{
-		baseEntry: &baseEntry{name: name}, // 埋込時のキーには構造体と同名のものを使うことができる
-		size:      size,
+		defaultEntry: &defaultEntry{name: name}, // 埋込時のキーには構造体と同名のものを使うことができる
+		size:         size,
 	}
 }
 func NewDirectory(name string) *directory {
-	return &directory{baseEntry: &baseEntry{name: name}}
+	return &directory{defaultEntry: &defaultEntry{name: name}}
 }

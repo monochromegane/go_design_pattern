@@ -31,33 +31,33 @@ func (self *StringDisplayImpl) printLine() string {
 	return str
 }
 
-type Display struct {
+type DefaultDisplay struct {
 	impl DisplayImpl
 }
 
-func (self *Display) open() string {
+func (self *DefaultDisplay) open() string {
 	return self.impl.rawOpen()
 }
 
-func (self *Display) print() string {
+func (self *DefaultDisplay) print() string {
 	return self.impl.rawPrint()
 }
 
-func (self *Display) close() string {
+func (self *DefaultDisplay) close() string {
 	return self.impl.rawClose()
 }
 
-func (self *Display) display() string {
+func (self *DefaultDisplay) Display() string {
 	return self.open() +
 		self.print() +
 		self.close()
 }
 
 type CountDisplay struct {
-	*Display
+	*DefaultDisplay
 }
 
-func (self *CountDisplay) multiDisplay(num int) string {
+func (self *CountDisplay) MultiDisplay(num int) string {
 	str := self.open()
 	for i := 0; i < num; i++ {
 		str += self.print()

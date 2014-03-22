@@ -6,19 +6,19 @@ import (
 
 func TestAbstractFactory(t *testing.T) {
 
-	factory := mdFactory{}
+	factory := MdFactory{}
 
-	usYahoo := factory.createLink("Yahoo!", "http://www.yahoo.com")
-	jaYahoo := factory.createLink("Yahoo!Japan", "http://www.yahoo.co.jp")
+	usYahoo := factory.CreateLink("Yahoo!", "http://www.yahoo.com")
+	jaYahoo := factory.CreateLink("Yahoo!Japan", "http://www.yahoo.co.jp")
 
-	tray := factory.createTray("Yahoo!")
-	tray.addToTray(usYahoo)
-	tray.addToTray(jaYahoo)
+	tray := factory.CreateTray("Yahoo!")
+	tray.AddToTray(usYahoo)
+	tray.AddToTray(jaYahoo)
 
-	page := factory.createPage("Title", "Author")
-	page.addToContent(tray)
+	page := factory.CreatePage("Title", "Author")
+	page.AddToContent(tray)
 
-	output := page.output()
+	output := page.Output()
 
 	expect := "title: Title\nauthor: Author\n- Yahoo!\n[Yahoo!](http://www.yahoo.com)\n[Yahoo!Japan](http://www.yahoo.co.jp)\n\n"
 

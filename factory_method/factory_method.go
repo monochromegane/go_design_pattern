@@ -1,12 +1,12 @@
 package factory_method
 
 type creater interface {
-	createProduct(owner string) user
-	registerProduct(user)
+	createProduct(owner string) User
+	registerProduct(User)
 }
 
-type user interface {
-	use() string
+type User interface {
+	Use() string
 }
 
 type Factory struct {
@@ -19,11 +19,11 @@ type Factory struct {
 // 処理の流れが簡易でテンプレートを使わないでよければ、ファクトリとなる関数を
 // 直接引数に渡してもよい
 // この場合、個別のファクトリークラスを定義しなくてもよくなる。
-// func (self *Factory) create(factoryMethod func() user) {
+// func (self *Factory) Create(factoryMethod func() User) {
 //   self.product = factoryMethod()
 //   return self.product
 // }
-func (self *Factory) create(factory creater, owner string) user {
+func (self *Factory) Create(factory creater, owner string) User {
 	user := factory.createProduct(owner)
 	factory.registerProduct(user)
 	return user
@@ -41,7 +41,7 @@ type IDCard struct {
 	owner string
 }
 
-func (self *IDCard) use() string {
+func (self *IDCard) Use() string {
 	return self.owner
 }
 
@@ -50,11 +50,11 @@ type IDCardFactory struct {
 	owners []*string
 }
 
-func (self *IDCardFactory) createProduct(owner string) user {
+func (self *IDCardFactory) createProduct(owner string) User {
 	return &IDCard{owner}
 }
 
-func (self *IDCardFactory) registerProduct(product user) {
-	owner := product.use()
+func (self *IDCardFactory) registerProduct(product User) {
+	owner := product.Use()
 	self.owners = append(self.owners, &owner)
 }

@@ -1,7 +1,7 @@
 package adapter
 
 type Decorator interface {
-	decorate() string
+	Decorate() string
 }
 
 type Banner struct {
@@ -25,6 +25,6 @@ func NewEmbeddedDecorateBanner(str string) *EmbeddedDecorateBanner {
 }
 
 // インターフェースの実装と埋め込んだ構造体のメソッドによるアダプタ
-func (self *EmbeddedDecorateBanner) decorate() string {
+func (self *EmbeddedDecorateBanner) Decorate() string {
 	return self.getString()
 }

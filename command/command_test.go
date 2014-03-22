@@ -6,20 +6,20 @@ import (
 
 func TestCommand(t *testing.T) {
 
-	macro := macroCommand{}
+	macro := MacroCommand{}
 
-	macro.append(&drawCommand{&position{1, 1}})
-	macro.append(&drawCommand{&position{2, 2}})
+	macro.Append(&DrawCommand{&Position{1, 1}})
+	macro.Append(&DrawCommand{&Position{2, 2}})
 
 	expect := "1.1\n2.2\n"
-	if macro.execute() != expect {
-		t.Errorf("Expect result to equal %s, but %s.\n", expect, macro.execute())
+	if macro.Execute() != expect {
+		t.Errorf("Expect result to equal %s, but %s.\n", expect, macro.Execute())
 	}
 
-	macro.undo()
+	macro.Undo()
 	expect = "1.1\n"
-	if macro.execute() != expect {
-		t.Errorf("Expect result to equal %s, but %s.\n", expect, macro.execute())
+	if macro.Execute() != expect {
+		t.Errorf("Expect result to equal %s, but %s.\n", expect, macro.Execute())
 	}
 
 }

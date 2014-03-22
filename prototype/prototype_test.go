@@ -5,15 +5,15 @@ import (
 )
 
 func TestPrototype(t *testing.T) {
-	product := product{"A"}
-	product.setUp()
+	product := Product{"A"}
+	product.SetUp()
 
-	manager := manager{}
-	manager.register(&product)
+	manager := Manager{}
+	manager.Register(&product)
 
-	cloned := manager.create("A")
+	cloned := manager.Create("A")
 
-	if cloned.getName() != product.getName() {
+	if cloned.GetName() != product.GetName() {
 		t.Errorf("Expect instance to equal, but not equal.")
 	}
 

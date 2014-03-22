@@ -24,7 +24,7 @@ func (self *bigChar) loadFontData() {
 	self.fontData = str
 }
 
-func (self *bigChar) print() string {
+func (self *bigChar) Print() string {
 	return self.fontData
 }
 
@@ -65,10 +65,10 @@ func NewBigString(str string) *bigString {
 	return bigStr
 }
 
-func (self *bigString) print() string {
+func (self *bigString) Print() string {
 	var result string
 	for _, s := range self.bigChars {
-		result += s.print() + "\n"
+		result += s.Print() + "\n"
 	}
 	return result
 }

@@ -54,32 +54,32 @@ func (self *nightState) doUse(context context) {
 }
 
 type context interface {
-	setClock(hour int)
+	SetClock(hour int)
 	changeState(state state)
 	recordLog(log string)
 }
 
-type safeFrame struct {
-	state state
+type SafeFrame struct {
+	State state
 	logs  []string
 }
 
-func (self *safeFrame) setClock(hour int) {
-	self.state.doClock(self, hour)
+func (self *SafeFrame) SetClock(hour int) {
+	self.State.doClock(self, hour)
 }
 
-func (self *safeFrame) changeState(state state) {
-	self.state = state
+func (self *SafeFrame) changeState(state state) {
+	self.State = state
 }
 
-func (self *safeFrame) recordLog(log string) {
+func (self *SafeFrame) recordLog(log string) {
 	self.logs = append(self.logs, log)
 }
 
-func (self *safeFrame) use() {
-	self.state.doUse(self)
+func (self *SafeFrame) Use() {
+	self.State.doUse(self)
 }
 
-func (self *safeFrame) getLog() string {
+func (self *SafeFrame) GetLog() string {
 	return strings.Join(self.logs, " ")
 }

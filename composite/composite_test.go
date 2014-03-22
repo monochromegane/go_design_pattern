@@ -10,13 +10,13 @@ func TestComposite(t *testing.T) {
 	usrDir := NewDirectory("usr")
 	fileA := NewFile("A", 1)
 
-	rootDir.add(usrDir)
-	rootDir.add(fileA)
+	rootDir.Add(usrDir)
+	rootDir.Add(fileA)
 
 	fileB := NewFile("B", 2)
-	usrDir.add(fileB)
+	usrDir.Add(fileB)
 
-	result := rootDir.printList("")
+	result := rootDir.PrintList("")
 
 	expect := "/root (3)\n/root/usr (2)\n/root/usr/B (2)\n/root/A (1)\n"
 	if result != expect {

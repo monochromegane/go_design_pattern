@@ -10,6 +10,6 @@ func NewCompositionDecorateBanner(str string) *ComposiotionDecorateBanner {
 }
 
 // インターフェースの実装と移譲によるアダプタ
-func (self *ComposiotionDecorateBanner) decorate() string {
+func (self *ComposiotionDecorateBanner) Decorate() string {
 	return self.banner.getString()
 }

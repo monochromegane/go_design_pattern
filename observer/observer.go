@@ -8,7 +8,7 @@ type numberGenerator struct {
 	observers []observer
 }
 
-func (self *numberGenerator) addObserver(observer observer) {
+func (self *numberGenerator) AddObserver(observer observer) {
 	self.observers = append(self.observers, observer)
 }
 
@@ -24,6 +24,10 @@ type randomNumberGenerator struct {
 	*numberGenerator
 }
 
+func NewRandomNumberGenerator() *randomNumberGenerator {
+	return &randomNumberGenerator{&numberGenerator{}}
+}
+
 type number interface {
 	getNumber() int
 }
@@ -32,7 +36,7 @@ func (self *randomNumberGenerator) getNumber() int {
 	return rand.Intn(50)
 }
 
-func (self *randomNumberGenerator) execute() []int {
+func (self *randomNumberGenerator) Execute() []int {
 	return self.notifyObservers()
 }
 
@@ -40,10 +44,10 @@ type observer interface {
 	update() int
 }
 
-type digitObserver struct {
+type DigitObserver struct {
 	generator number
 }
 
-func (self *digitObserver) update() int {
+func (self *DigitObserver) update() int {
 	return self.generator.getNumber()
 }
