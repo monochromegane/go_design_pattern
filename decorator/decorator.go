@@ -8,7 +8,6 @@ type display interface {
 }
 
 type defaultDisplay struct {
-	display
 }
 
 func (self *defaultDisplay) Show(display display) string {
